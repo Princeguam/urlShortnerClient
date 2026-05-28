@@ -3,7 +3,7 @@ import { requestInterceptor } from "./interceptors/requestInterceptor";
 import { responseInterceptor } from "./interceptors/responseInterceptor";
 
 const BASE_URL =
-    import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api/v1";
+    import.meta.env.VITE_APIV1_URL || "http://localhost:3000/api/v1";
 
 const api = axios.create({
     baseURL: BASE_URL,

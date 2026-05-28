@@ -7,7 +7,7 @@ import { clearAuth } from "../auth/clearAuth";
 export interface RetryableRequest extends InternalAxiosRequestConfig {
     _retry?: boolean;
 }
-const isRefreshing = false;
+let isRefreshing = false;
 
 export const responseInterceptor = async (error: AxiosError) => {
     const originalRequest = error.config as RetryableRequest | undefined;
@@ -28,6 +28,7 @@ export const responseInterceptor = async (error: AxiosError) => {
 
         originalRequest._retry = true;
 
+        isRefreshing = true;
         try {
             const newAccessToken = await refreshAuth();
             processQueue(null, newAccessToken);
@@ -38,6 +39,8 @@ export const responseInterceptor = async (error: AxiosError) => {
             clearAuth();
             window.location.href = "/login";
             return Promise.reject(refreshError);
+        } finally {
+            isRefreshing = false;
         }
     }
 

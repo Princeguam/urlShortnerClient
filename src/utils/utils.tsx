@@ -1,4 +1,4 @@
-import type { SignupCredentials } from "../types/Auth";
+import type { SignupForm } from "../types/Auth";
 import { type StrengthLevel } from "./constants/constants";
 
 export const getStrength = (pwd: string): StrengthLevel => {
@@ -11,7 +11,7 @@ export const getStrength = (pwd: string): StrengthLevel => {
     return score as StrengthLevel;
 };
 
-export const validateSignupForm = (form: SignupCredentials): string | null => {
+export const validateSignupForm = (form: SignupForm): string | null => {
     if (!form.username.trim()) return "Full name is required.";
     if (!form.email) return "Email is required.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))

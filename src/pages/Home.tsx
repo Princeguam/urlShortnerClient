@@ -76,7 +76,7 @@ const Home = () => {
 
     return (
         <PageWrapper>
-            <div className="container-lg" style={{ maxWidth: 860 }}>
+            <div className="mx-auto px-4" style={{ maxWidth: 860 }}>
                 {/* ── Header ── */}
                 <div
                     style={{
@@ -109,12 +109,9 @@ const Home = () => {
                     </div>
 
                     <button
-                        className="btn btn-primary"
                         onClick={() => navigate("/links/create")}
-                        style={{
-                            borderRadius: "var(--radius-sm)",
-                            fontSize: "0.875rem",
-                        }}>
+                        className="py-2 px-3 rounded-md font-semibold"
+                        style={{ background: 'var(--forest)', color: 'var(--linen)', borderRadius: 'var(--radius-sm)', fontSize: '0.875rem' }}>
                         + Create short link
                     </button>
                 </div>
@@ -131,21 +128,19 @@ const Home = () => {
                     {/* Search */}
                     <input
                         type="text"
-                        className="form-control"
                         placeholder="Search links…"
                         value={search}
                         onChange={(e) => handleSearch(e.target.value)}
-                        style={{ maxWidth: 240, fontSize: "0.875rem" }}
+                        className="input-base"
+                        style={{ maxWidth: 240, fontSize: '0.875rem' }}
                     />
 
                     {/* Status filter */}
                     <select
-                        className="form-select"
                         value={filter}
-                        onChange={(e) =>
-                            handleFilter(e.target.value as FilterOption)
-                        }
-                        style={{ maxWidth: 140, fontSize: "0.875rem" }}>
+                        onChange={(e) => handleFilter(e.target.value as FilterOption)}
+                        className="input-base"
+                        style={{ maxWidth: 140, fontSize: '0.875rem' }}>
                         <option value="all">All status</option>
                         <option value="active">Active</option>
                         <option value="expired">Expired</option>
@@ -154,12 +149,10 @@ const Home = () => {
 
                     {/* Sort */}
                     <select
-                        className="form-select"
                         value={sort}
-                        onChange={(e) =>
-                            handleSort(e.target.value as SortOption)
-                        }
-                        style={{ maxWidth: 160, fontSize: "0.875rem" }}>
+                        onChange={(e) => handleSort(e.target.value as SortOption)}
+                        className="input-base"
+                        style={{ maxWidth: 160, fontSize: '0.875rem' }}>
                         {(Object.keys(SORT_LABELS) as SortOption[]).map(
                             (key) => (
                                 <option key={key} value={key}>
@@ -172,36 +165,17 @@ const Home = () => {
 
                 {/* ── Content ── */}
                 {loading && (
-                    <div style={{ textAlign: "center", padding: "4rem 0" }}>
-                        <div
-                            className="spinner-border"
-                            style={{
-                                color: "var(--forest)",
-                                width: "2rem",
-                                height: "2rem",
-                            }}
-                            role="status"
-                        />
+                    <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+                        <div className="small-spinner" aria-hidden />
                     </div>
                 )}
 
                 {error && !loading && (
-                    <div
-                        className="alert"
-                        style={{
-                            background: "#fff3f3",
-                            border: "1px solid #f8c2c2",
-                            color: "#c0392b",
-                            borderRadius: "var(--radius-sm)",
-                            fontSize: "0.875rem",
-                        }}>
-                        {error}
-                        <button
-                            className="btn btn-sm ms-3"
-                            onClick={fetchLinks}
-                            style={{ fontSize: "0.8rem" }}>
-                            Retry
-                        </button>
+                    <div className="alert-error">
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+                            <div>{error}</div>
+                            <button onClick={fetchLinks} className="btn-outline">Retry</button>
+                        </div>
                     </div>
                 )}
 
@@ -230,15 +204,7 @@ const Home = () => {
                         <p style={{ fontSize: "0.875rem" }}>
                             Create your first short link to get started.
                         </p>
-                        <button
-                            className="btn btn-primary mt-2"
-                            onClick={() => navigate("/links/create")}
-                            style={{
-                                borderRadius: "var(--radius-sm)",
-                                fontSize: "0.875rem",
-                            }}>
-                            + Create short link
-                        </button>
+                        <button onClick={() => navigate('/links/create')} className="btn-primary mt-2">+ Create short link</button>
                     </div>
                 )}
 
@@ -266,10 +232,10 @@ const Home = () => {
                             marginTop: "2rem",
                         }}>
                         <button
-                            className="btn btn-outline-primary btn-sm"
                             disabled={page === 1}
                             onClick={() => setPage((p) => p - 1)}
-                            style={{ fontSize: "0.8rem" }}>
+                            className="py-1 px-2 rounded-sm"
+                            style={{ fontSize: '0.8rem', border: '1px solid var(--forest)', color: 'var(--forest)', background: 'transparent' }}>
                             ← Prev
                         </button>
                         <span
@@ -281,10 +247,10 @@ const Home = () => {
                             Page {page} of {totalPages}
                         </span>
                         <button
-                            className="btn btn-outline-primary btn-sm"
                             disabled={page === totalPages}
                             onClick={() => setPage((p) => p + 1)}
-                            style={{ fontSize: "0.8rem" }}>
+                            className="py-1 px-2 rounded-sm"
+                            style={{ fontSize: '0.8rem', border: '1px solid var(--forest)', color: 'var(--forest)', background: 'transparent' }}>
                             Next →
                         </button>
                     </div>

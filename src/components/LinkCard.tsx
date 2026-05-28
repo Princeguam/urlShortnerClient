@@ -26,145 +26,44 @@ const LinkCard = ({ link }: Props) => {
     return (
         <div
             onClick={() => navigate(`/links/${link.id}`)}
-            style={{
-                background: "white",
-                border: "1px solid var(--border-light)",
-                borderRadius: "var(--radius-md)",
-                padding: "1.1rem 1.25rem",
-                cursor: "pointer",
-                transition: "box-shadow 0.2s ease, transform 0.15s ease",
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-            }}
-            onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.boxShadow =
-                    "var(--shadow-md)";
-                (e.currentTarget as HTMLDivElement).style.transform =
-                    "translateY(-1px)";
-            }}
-            onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-                (e.currentTarget as HTMLDivElement).style.transform = "none";
-            }}>
+            className="bg-white border rounded-md p-4 cursor-pointer transition-shadow duration-150 ease-in-out flex items-center gap-4 hover:shadow-md hover:-translate-y-0.5"
+            style={{ borderColor: 'var(--border-light)', borderRadius: 'var(--radius-md)' }}>
             {/* Icon */}
-            <div
-                style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "var(--radius-sm)",
-                    background: "var(--bg-muted)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "1rem",
-                    flexShrink: 0,
-                }}>
+            <div className="w-10 h-10 rounded-sm flex items-center justify-center text-base flex-shrink-0" style={{ background: 'var(--bg-muted)', borderRadius: 'var(--radius-sm)' }}>
                 🔗
             </div>
 
             {/* Main info */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-                <div
-                    style={{
-                        fontWeight: 600,
-                        fontSize: "0.875rem",
-                        color: "var(--text-dark)",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                    }}>
+            <div className="flex-1 min-w-0">
+                <div className="font-semibold text-sm text-[var(--text-dark)] truncate">
                     {link.title ?? link.shortCode}
                 </div>
-                <div
-                    style={{
-                        fontSize: "0.8rem",
-                        color: "var(--fern)",
-                        fontWeight: 500,
-                        marginTop: 2,
-                    }}>
+                <div className="text-[0.8rem] text-[var(--fern)] font-medium mt-0.5">
                     {link.shortUrl}
                 </div>
-                <div
-                    style={{
-                        fontSize: "0.75rem",
-                        color: "var(--text-muted)",
-                        marginTop: 2,
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                    }}>
+                <div className="text-[0.75rem] text-[var(--text-muted)] mt-0.5 truncate">
                     {link.originalUrl}
                 </div>
             </div>
 
             {/* Stats */}
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    flexShrink: 0,
-                    minWidth: 64,
-                }}>
-                <span
-                    style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: "1.3rem",
-                        fontWeight: 700,
-                        color: "var(--forest)",
-                        lineHeight: 1,
-                    }}>
+            <div className="flex flex-col items-center flex-shrink-0 min-w-[64px]">
+                <span className="font-display text-[1.3rem] font-extrabold text-[var(--forest)] leading-none">
                     {link.totalClicks.toLocaleString()}
                 </span>
-                <span
-                    style={{
-                        fontSize: "0.7rem",
-                        color: "var(--text-muted)",
-                        marginTop: 2,
-                    }}>
-                    clicks
-                </span>
+                <span className="text-[0.7rem] text-[var(--text-muted)] mt-0.5">clicks</span>
             </div>
 
             {/* Status badge */}
-            <div
-                style={{
-                    padding: "3px 10px",
-                    borderRadius: 20,
-                    background: status.bg,
-                    color: status.color,
-                    fontSize: "0.72rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.03em",
-                    flexShrink: 0,
-                }}>
-                {status.label}
-            </div>
+            <div className="px-2.5 py-[3px] rounded-full font-semibold text-[0.72rem] flex-shrink-0" style={{ background: status.bg, color: status.color, letterSpacing: '0.03em' }}>{status.label}</div>
 
             {/* Copy button */}
             <button
                 onClick={handleCopy}
                 title="Copy short URL"
-                style={{
-                    background: "var(--bg-muted)",
-                    border: "1px solid var(--border-light)",
-                    borderRadius: "var(--radius-sm)",
-                    padding: "0.3rem 0.6rem",
-                    fontSize: "0.75rem",
-                    cursor: "pointer",
-                    color: "var(--text-muted)",
-                    flexShrink: 0,
-                    transition: "all 0.15s",
-                }}
-                onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.color =
-                        "var(--forest)")
-                }
-                onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.color =
-                        "var(--text-muted)")
-                }>
+                className="px-2 py-1 text-sm rounded-sm border flex-shrink-0"
+                style={{ background: 'var(--bg-muted)', borderColor: 'var(--border-light)', color: 'var(--text-muted)' }}
+            >
                 Copy
             </button>
         </div>

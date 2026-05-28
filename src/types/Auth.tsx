@@ -6,6 +6,7 @@ export interface AuthResponse {
     accessToken: string;
     refreshToken: string;
     role: Role;
+    user?: User;
     expiresIn: number | null;
 }
 
@@ -35,8 +36,8 @@ export interface LoginForm {
 }
 
 export interface AuthContextValue {
-    role: Role;
-    user: User;
+    role?: Role | null;
+    user: User | null;
     isLoading: boolean;
     isAuthenticated: boolean;
     login: (credentials: LoginCredentials) => Promise<AuthResponse>;

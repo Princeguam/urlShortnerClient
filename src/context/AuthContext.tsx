@@ -11,7 +11,7 @@ import type {
     SignupCredentials,
     AuthContextValue,
 } from "../types/Auth";
-import type { User } from "../types/Types";
+import type { User } from "../types/User";
 
 import {
     loginRequest,
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const login = useCallback(
         async (loginDetails: LoginCredentials): Promise<AuthResponse> => {
             const data = await loginRequest(loginDetails);
-            setUser(data.user);
+            setUser(data.user ?? null);
 
             return data;
         },
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         async (signupDetails: SignupCredentials): Promise<AuthResponse> => {
             const data = await signupRequest(signupDetails);
 
-            setUser(data.user);
+            setUser(data.user ?? null);
 
             return data;
         },
